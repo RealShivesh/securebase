@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import authRoutes from "./routes/authRoutes.js";
+import connectDB from './config/db.js';
 
 dotenv.config();
 const app = express();
@@ -8,8 +9,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
+connectDB();
 
+app.use("/api/auth", authRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
